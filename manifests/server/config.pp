@@ -91,6 +91,12 @@ class mongodb::server::config {
       $storage_engine_internal = $storage_engine
     }
 
+    # Fix a bug on service start
+    file { $pidfilepath:
+      ensure  => present,
+      owner   => $user,
+      group   => $group,
+    }
 
     #Pick which config content to use
     if $config_content {
